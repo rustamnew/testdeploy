@@ -19,8 +19,7 @@
         methods: {
             confirm() {
                 document.querySelector('.dialog.active').classList.remove('.active')
-                this.dialogStore.state = false
-                this.dialogStore.callback()
+
             }
         }
     }
