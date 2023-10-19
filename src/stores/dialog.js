@@ -6,7 +6,7 @@ export const useDialogStore = defineStore('dialog', {
     state: () => {
         
         return {
-            state: false,
+            state: true,
             callback: 0,
             //callback: () => {},
 
