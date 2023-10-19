@@ -27,7 +27,7 @@
 </script>
 
 <template>
-    <div class="dialog fullscreen" :class="this.dialogStore.state == true ? 'active' : ''">
+    <div :class="dialogStore.state == true ? 'active' : ''">
         <div class="content">
             <h2>Вы уверены что хотите удалить?</h2>
 
