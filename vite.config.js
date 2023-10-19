@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: '/rustam_project/',
+    base: '/testdeploy/',
     plugins: [vue()],
     resolve: {
     alias: {
