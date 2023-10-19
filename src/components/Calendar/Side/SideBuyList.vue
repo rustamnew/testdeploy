@@ -143,9 +143,9 @@ import {useDialogStore} from '../../../stores/dialog';
                 let id = item.getAttribute('buy-item-id')
 
                 
-                this.dialogStore.showConfirmDialog(() => {
+                /*this.dialogStore.showConfirmDialog(() => {
                     this.removeBuyItemConfirmed(item, id)
-                })
+                })*/
             },
 
             removeBuyItemConfirmed(item, id) {
