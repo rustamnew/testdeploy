@@ -18,7 +18,7 @@
     
     <div class="preview">
         <!-- Заглушка, если вдруг захотим в будущем добавить превью, закомментировать при необходимости -->
-        <img :src="'../../assets/images/empty_large.jpg'" alt="image_sample">
+        <img :src="'@/assets/images/empty_large.jpg'" alt="image_sample">
     </div>
 
     <p class="text"> {{ body }}</p>
