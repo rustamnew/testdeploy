@@ -4,7 +4,7 @@
     import {useUserStore} from '../../stores/userStore';
     import {usePostStore} from '../../stores/postStore';
     
-    import imgUrl from '@/assets/images/empty_small.jpg'
+    import imgUrl from '../../assets/images/empty_small.jpg'
 </script>
 
 <template>
