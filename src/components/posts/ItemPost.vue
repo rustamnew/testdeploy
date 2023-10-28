@@ -3,7 +3,7 @@
     import AddComment from '../comments/AddComment.vue'
     import Users from '../users/Users.vue'
     import ItemUser from '../users/ItemUser.vue'
-    import imgUrl from '../../images/empty_large.jpg'
+    import imgUrl from './empty_large.jpg'
 </script>
 
 <template>
