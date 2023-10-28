@@ -26,7 +26,7 @@
 
         <p class="text"> {{ body }}</p>
         <div class="preview">
-            <img :src="'./images/empty_small.jpg'" alt="image_sample">
+            <img :src="'@/images/empty_small.jpg'" alt="image_sample">
         </div>
 
         <button class="view-user-posts" @click="viewUserPosts(id)">Посмотреть посты пользователя</button>
