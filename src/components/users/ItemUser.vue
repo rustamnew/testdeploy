@@ -4,7 +4,7 @@
     import {useUserStore} from '../../stores/userStore';
     import {usePostStore} from '../../stores/postStore';
     
-
+    import imgUrl from '@/assets/images/empty_small.jpg'
 </script>
 
 <template>
@@ -26,7 +26,7 @@
 
         <p class="text"> {{ body }}</p>
         <div class="preview">
-            <img :src="'@/assets/images/empty_small.jpg'" alt="image_sample">
+            <img :src="imgUrl" alt="image_sample">
         </div>
 
         <button class="view-user-posts" @click="viewUserPosts(id)">Посмотреть посты пользователя</button>
