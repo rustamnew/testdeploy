@@ -16,7 +16,7 @@ import ItemUser from './ItemUser.vue';
 </div>
 
 <div class="user-list" v-if="mode=='users-list'">
-    <ItemUser v-for="item in this.userStore.users"
+    <ItemUser v-for="item in userStore.users"
     :name="item.name"
     :mode="'user-list-item'"
     :id="item.id"
