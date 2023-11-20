@@ -7,7 +7,7 @@ import svgLoader from 'vite-svg-loader'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  //base: 'rustam_test_task_frontend_17.11.2023',
+  base: '/testdeploy/',
   plugins: [
     vue(),
     svgLoader()
