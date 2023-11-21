@@ -10,7 +10,7 @@ import ArrowIcon from '../../assets/icons/ArrowIcon.svg'
 <template>
     <div class="table-pagination" v-if="!tableStore.search_filtered_rows">
         
-        <button class="page prev"><ArrowIcon /></button>
+        <button class="page prev" @click="pagePrev()"><ArrowIcon /></button>
         
         <button 
             v-for="page in pages"
@@ -20,7 +20,7 @@ import ArrowIcon from '../../assets/icons/ArrowIcon.svg'
             @click="setPage($event)">{{ page[0] }}
         </button>
 
-        <button class="page next"><ArrowIcon /></button>
+        <button class="page next" @click="pageNext()"><ArrowIcon /></button>
 
     </div>
 </template>
@@ -56,6 +56,18 @@ import ArrowIcon from '../../assets/icons/ArrowIcon.svg'
                 this.$emit('updatePage', {
                     value: page,
                 })
+            },
+            pagePrev() {
+                if (this.tableStore.current_page > 1) {
+                    this.tableStore.current_page--
+                }
+            },
+            pageNext() {
+                if (this.tableStore.current_page < Object.entries(this.tableStore.pages).length) {
+                    this.tableStore.current_page++
+                    
+                }
+
             }
         }
     }
