@@ -7,7 +7,7 @@ export default {
     },
     actions: {
         async addNote(context, data) {
-            await axios.post('https://dist.nd.ru/api/notes', {
+            await axios.post('/api/notes', {
                 title: data.title,
                 content: data.content
             })
@@ -21,7 +21,7 @@ export default {
         },
 
         async fetchNotes(/*context*/) {
-            await axios.get('https://dist.nd.ru/api/notes')
+            await axios.get('/api/notes')
             .then((response) => {
                 this.commit("updateNotes", response.data)
             })
@@ -31,7 +31,7 @@ export default {
         },
 
         async removeNote(context, id) {
-            await axios.delete(`https://dist.nd.ru/api/notes/${id}`)
+            await axios.delete(`/api/notes/${id}`)
             .then((/*response*/) => {
                 this.dispatch("fetchNotes")
             })

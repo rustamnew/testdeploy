@@ -9,7 +9,7 @@ export default {
     },
     actions: {
         async registerUser(context, data) {
-            await axios.post('https://dist.nd.ru/api/reg', {
+            await axios.post('/api/reg', {
                 email: data.email,
                 password: data.password,
                 confirm_password: data.confirm_password,
@@ -27,7 +27,7 @@ export default {
         },
 
         async loginUser(context, data) {
-            await axios.post('https://dist.nd.ru/api/auth', {
+            await axios.post('/api/auth', {
                 email: data.email,
                 password: data.password
             })
@@ -49,7 +49,7 @@ export default {
         },
 
         async getUser(context) {
-            await axios.get('https://dist.nd.ru/api/auth')
+            await axios.get('/api/auth')
             .then((response) => {
                 context.commit('updateUser', response.data)
             })
@@ -59,7 +59,7 @@ export default {
         },
 
         async logoutUser(context) {
-            await axios.delete('https://dist.nd.ru/api/auth')
+            await axios.delete('/api/auth')
             .then((/*response*/) => {
                 context.commit('updateUser', {})
             })
