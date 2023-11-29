@@ -49,7 +49,7 @@ export default {
         },
 
         async getUser(context) {
-            await axios.get('https://dist.nd.ru/api/auth')
+            await axios.get(process.env.VUE_APP_API_URL + '/api/auth')
             .then((response) => {
                 context.commit('updateUser', response.data)
             })
