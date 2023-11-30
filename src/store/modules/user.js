@@ -9,7 +9,7 @@ export default {
     },
     actions: {
         async registerUser(context, data) {
-            await axios.post('https://cors-anywhere.herokuapp.com/https://dist.nd.ru/api/reg', {
+            await axios.post('https://dist.nd.ru/api/reg', {
                 email: data.email,
                 password: data.password,
                 confirm_password: data.confirm_password,
@@ -28,7 +28,7 @@ export default {
 
         async loginUser(context, data) {
             await axios({
-                url: 'https://cors-anywhere.herokuapp.com/https://dist.nd.ru/api/auth',
+                url: 'https://dist.nd.ru/api/auth',
                 method: 'POST',
                 data: {
                     email: data.email,
@@ -63,7 +63,7 @@ export default {
         },
 
         async logoutUser(context) {
-            await axios.delete('https://cors-anywhere.herokuapp.com/https://dist.nd.ru/api/auth')
+            await axios.delete('https://dist.nd.ru/api/auth')
             .then((/*response*/) => {
                 context.commit('updateUser', {})
             })
