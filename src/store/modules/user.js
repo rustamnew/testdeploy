@@ -35,7 +35,7 @@ export default {
                 url: 'https://dist.nd.ru/api/auth',
                 method: 'POST',
                 mode: 'cors',
-                body: {
+                data: {
                     email: data.email,
                     password: data.password
                 }
