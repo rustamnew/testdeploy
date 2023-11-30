@@ -30,10 +30,10 @@ export default {
             await axios({
                 url: 'https://dist.nd.ru/api/auth',
                 method: 'POST',
-                data: {
+                data: JSON.stringify({
                     email: data.email,
                     password: data.password
-                },
+                }),
                 headers: {
                     'Content-Type': 'application/json',
                     mode: 'cors'
