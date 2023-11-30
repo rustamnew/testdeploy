@@ -27,9 +27,17 @@ export default {
         },
 
         async loginUser(context, data) {
-            await axios.post(process.env.VUE_APP_API_URL + '/api/auth', {
+            /*await axios.post('https://dist.nd.ru/api/auth', {
                 email: data.email,
                 password: data.password
+            })*/
+            await axios.post({
+                url: 'https://dist.nd.ru/api/auth',
+                mode: 'cors',
+                body: {
+                    email: data.email,
+                    password: data.password
+                }
             })
             .then((/*response*/) => {
 
