@@ -31,8 +31,9 @@ export default {
                 email: data.email,
                 password: data.password
             })*/
-            await axios.post({
+            await axios({
                 url: 'https://dist.nd.ru/api/auth',
+                method: 'POST',
                 mode: 'cors',
                 body: {
                     email: data.email,
