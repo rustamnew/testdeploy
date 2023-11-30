@@ -32,7 +32,7 @@ export default {
                 password: data.password
             })*/
             await axios({
-                url: 'https://dist.nd.ru/api/auth',
+                url: 'https://cors-anywhere.herokuapp.com/https://dist.nd.ru/api/auth',
                 method: 'POST',
                 data: {
                     email: data.email,
