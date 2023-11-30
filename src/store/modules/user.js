@@ -33,6 +33,10 @@ export default {
                 data: {
                     email: data.email,
                     password: data.password
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    mode: 'cors'
                 }
             })
             .then((/*response*/) => {
