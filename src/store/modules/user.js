@@ -28,7 +28,7 @@ export default {
 
         async loginUser(context, data) {
             await axios({
-                url: 'https://cors-anywhere.herokuapp.com/https://cors-anywhere.herokuapp.com/https://dist.nd.ru/api/auth',
+                url: 'https://cors-anywhere.herokuapp.com/https://dist.nd.ru/api/auth',
                 method: 'POST',
                 data: {
                     email: data.email,
