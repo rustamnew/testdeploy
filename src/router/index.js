@@ -1,40 +1,61 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import store from '../store'
+import { route } from "quasar/wrappers";
+import {
+  createRouter,
+  createMemoryHistory,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
+import routes from "./routes";
 
-Vue.use(VueRouter)
+//import { useUserStore } from "stores/user";
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/account',
-    name: 'account',
-    // lazy-loaded when the route is visited.
-    component: () => import('../views/AccountView.vue'),
+//const userStore = useUserStore();
 
-  }
-]
+/*
+ * If not building with SSR mode, you can
+ * directly export the Router instantiation;
+ *
+ * The function below can be async too; either use
+ * async/await or return a Promise which resolves
+ * with the Router instance.
+ */
 
-const router = new VueRouter({
-  routes,
-  mode: 'history',
-  base: '/testdeploy/'
-})
+export default route(function ({ store, ssrContext }) {
+  const createHistory = process.env.SERVER
+    ? createMemoryHistory
+    : process.env.VUE_ROUTER_MODE === "history"
+    ? createWebHistory
+    : createWebHashHistory;
 
+  const Router = createRouter({
+    scrollBehavior: () => ({ left: 0, top: 0 }),
+    routes,
 
-router.beforeEach((to, from, next) => {
-    const user = store.getters.getUser
+    // Leave this as is and make changes in quasar.conf.js instead!
+    // quasar.conf.js -> build -> vueRouterMode
+    // quasar.conf.js -> build -> publicPath
+    history: createHistory(process.env.VUE_ROUTER_BASE),
+  });
 
-    if (to.name == 'account' && !user.email) {
-        next('/')
+  Router.beforeEach((to, from, next) => {
+    if (to.path !== "/login") {
+      if (store.state.value.user !== undefined) {
+        if (store.state.value.user.user.hasOwnProperty("loggedIn")) {
+          if (store.state.value.user.user.loggedIn) {
+            next();
+          } else {
+            next("/login");
+          }
+        } else {
+          next("/login");
+        }
+      } else {
+        next("/login");
+      }
     } else {
-        next()
+      next();
     }
-})
+  });
 
-export default router
+  return Router;
+});
