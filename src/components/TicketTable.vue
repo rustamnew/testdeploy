@@ -94,7 +94,7 @@ const columns = [
   },
 ];
 export default defineComponent({
-  name: "TicketList",
+  name: "TicketTable",
   setup() {
     return {
       columns,

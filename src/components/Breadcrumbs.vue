@@ -12,7 +12,7 @@
 <script>
 import { defineComponent } from "vue";
 export default defineComponent({
-  name: "BreadcrumbsComponent",
+  name: "BreadCrumbs",
   data() {
     return {
       breadcrumbs: [],

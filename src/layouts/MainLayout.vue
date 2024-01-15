@@ -108,3 +108,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+h1 {
+  font-size: 5rem;
+}
+</style>
