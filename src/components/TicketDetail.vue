@@ -2,7 +2,7 @@
 import { useTicketStore } from "stores/ticket";
 
 const props = defineProps({
-  ticketId: Number,
+  ticketId: String,
 });
 </script>
 

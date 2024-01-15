@@ -28,7 +28,7 @@ const linksList = [
           round
           icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="toggleLeftDrawer()"
         />
 
         <q-toolbar-title> Тестовое задание </q-toolbar-title>
@@ -86,14 +86,9 @@ import Breadcrumbs from "components/Breadcrumbs.vue";
 
 export default defineComponent({
   name: "MainLayout",
-
-  setup() {
-    const leftDrawerOpen = ref(false);
+  data() {
     return {
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
+      leftDrawerOpen: false,
     };
   },
 
@@ -106,6 +101,9 @@ export default defineComponent({
       ticketStore.clearData();
 
       this.$router.replace("/login");
+    },
+    toggleLeftDrawer() {
+      this.leftDrawerOpen = !this.leftDrawerOpen;
     },
   },
 });

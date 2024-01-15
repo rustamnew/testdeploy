@@ -12,22 +12,36 @@ const routes = [
   },
   {
     path: "/login",
-    name: "Вход",
     component: () => import("layouts/LoginLayout.vue"),
-    children: [{ path: "", component: () => import("pages/LoginPage.vue") }],
+    children: [
+      {
+        path: "",
+        name: "Вход",
+        component: () => import("pages/LoginPage.vue"),
+      },
+    ],
   },
   {
     path: "/profile",
-    name: "Профиль",
+
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/ProfilePage.vue") }],
+    children: [
+      {
+        path: "",
+        name: "Профиль",
+        component: () => import("pages/ProfilePage.vue"),
+      },
+    ],
   },
   {
     path: "/tickets",
     name: "Тикеты",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/TicketsPage.vue") },
+      {
+        path: "",
+        component: () => import("pages/TicketsPage.vue"),
+      },
       {
         path: ":ticketId",
         name: "Тикет",
