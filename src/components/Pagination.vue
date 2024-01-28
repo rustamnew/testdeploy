@@ -78,7 +78,7 @@ import { useRepoStore } from "@/stores/repo"
         @apply mx-1
     }
     .page-list .page-item a {
-        @apply border rounded-lg py-2 px-4 block w-full h-full hover:bg-sky-500 hover:text-white
+        @apply border rounded-lg py-2 px-4 block w-full h-full hover:bg-sky-500 hover:text-white dark:text-white
     }
     .page-list .page-item:not(.disabled) a {
         @apply cursor-pointer 

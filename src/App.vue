@@ -6,8 +6,8 @@ import ThemeSwitcher from './components/ThemeSwitcher.vue';
 
 <template>
     <div class="flex flex-col w-full h-full items-center">
-        <header class="border-b py-5 flex flex-col items-center mb-10 w-full bg-white">
-            <h1 class="text-lg mb-4">Поиск репозиториев</h1>
+        <header class="border-b py-5 flex flex-col items-center mb-10 w-full bg-white dark:bg-opacity-0">
+            <h1 class="text-lg mb-4 dark:text-white">Поиск репозиториев</h1>
 
             <SearchForm />
         </header>

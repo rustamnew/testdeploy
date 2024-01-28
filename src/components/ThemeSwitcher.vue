@@ -9,7 +9,7 @@ const toggleDark = useToggle(isDark)
 </script>
 
 <template>
-    <button class="fixed border bg-white border-black rounded-full p-3 bottom-10 left-10 dark:border-white" @click="toggleDark()">
+    <button class="fixed border bg-white border-black rounded-full p-3 bottom-10 left-10 dark:border-white dark:bg-black" @click="toggleDark()">
         <IconDarkMode v-if="!isDark"/>
         <IconLightMode v-if="isDark"/>
     </button>
