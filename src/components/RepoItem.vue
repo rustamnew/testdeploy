@@ -1,0 +1,44 @@
+<script setup lang="ts">
+    import IconStar from './icons/IconStar.vue'
+
+    const props = defineProps({
+        item: Object as any
+    })
+</script>
+
+<template>
+    <div class="item p-2 border rounded-lg my-4 flex flex-col max-w-xl w-full">
+        <div class="title flex flex-col items-start mb-5">
+            <div class="name">
+                <a :href="`https://github.com/${item.owner.login}/${item.name}`" target="_blank" class="flex font-medium">
+                    {{ item.name }}
+                </a>
+            </div>
+
+            <div class="author">
+                <a :href="`https://github.com/${item.owner.login}`" target="_blank" class="flex items-center mr-3">
+                    <img class="size-5 rounded-full mr-2" :src="item.owner.avatar_url" alt="user_avatar">
+                    <span>{{ item.owner.login }}</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="text mb-3 font-medium">
+            {{ item.description }}
+        </div>
+
+        <div class="additional flex">
+            <div class="language mr-2 text-sm">
+                {{ item.language }}
+            </div>
+
+            <div class="stargazers ml-auto">
+                <a :href="`https://github.com/${item.owner.login}/${item.name}/stargazers`" class=" flex items-center text-sm font-medium" target="_blank">
+                    <IconStar />
+                    {{ item.stargazers_count }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+</template>
