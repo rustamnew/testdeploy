@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { Octokit } from "@octokit/rest"
 
 const octokit = new Octokit({
-    auth: import.meta.env.VITE_SECRET_KEY,
+    auth: GH_TOKEN,
 });
             
 export const useRepoStore = defineStore('repo', {
