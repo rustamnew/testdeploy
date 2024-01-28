@@ -19,7 +19,8 @@ permissions:
 concurrency:
   group: 'pages'
   cancel-in-progress: true
-
+env:
+  VITE_SECRET_KEY: ${{ secrets.VITE_SECRET_KEY }}
 jobs:
   # Single deploy job since we're just deploying
   deploy:
@@ -28,8 +29,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Node
