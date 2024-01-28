@@ -15,7 +15,7 @@ import Pagination from './Pagination.vue'
         <div class="search-results flex flex-col items-center">
             <RepoItem v-for="item in repoStore.repos" :item="item"/>
 
-            <div class="empty text-3xl font-bold text-center" v-if="!repoStore.repos.length && repoStore.isLoading === false">
+            <div class="empty text-3xl font-bold text-center dark:text-white" v-if="!repoStore.repos.length && repoStore.isLoading === false">
                 Нет записей
             </div>
         </div>
