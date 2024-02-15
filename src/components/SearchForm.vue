@@ -8,7 +8,7 @@ import { useRepoStore } from "@/stores/repo"
         <input 
         type="text" 
         placeholder="Название"
-        @keyup="searchRequest()"
+        @change="searchRequest()"
         v-model="searchQuery"
         class="
         bg-gray-50 border 

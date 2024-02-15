@@ -11,6 +11,10 @@ import Pagination from './Pagination.vue'
 <template>
     <Loading v-if="repoStore.isLoading === true"/>
 
+    <div v-if="repoStore.errorMessage" class="mt-4">
+        {{ repoStore.errorMessage }}
+    </div>
+
     <div class="flex flex-col justify-between h-full w-full">
         <div class="search-results flex flex-col items-center">
             <RepoItem v-for="item in repoStore.repos" :item="item"/>

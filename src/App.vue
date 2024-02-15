@@ -27,5 +27,8 @@ html.dark {
 html, body, #app {
     height: 100%;
 }
+body {
+    color: black;
+}
 </style>
 

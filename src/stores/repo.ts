@@ -17,7 +17,8 @@ export const useRepoStore = defineStore('repo', {
             total_pages: 1
         },
         searchQuery,
-        isLoading: false
+        isLoading: false,
+        errorMessage: ''
     }
   },
   actions: {
@@ -30,11 +31,18 @@ export const useRepoStore = defineStore('repo', {
         }
 
         if (this.searchQuery) {
-            const response = await octokit.request('GET /search/repositories', {
-                q: this.searchQuery,
-                page: this.pagination.current_page,
-                per_page: this.pagination.per_page
-            })
+            let response: any
+
+            try {
+                response = await octokit.request('GET /search/repositories', {
+                    q: this.searchQuery,
+                    page: this.pagination.current_page,
+                    per_page: this.pagination.per_page
+                })
+            } catch (error: any) {
+                console.log(error)
+                this.errorMessage = error
+            }
 
             if (response.data.total_count > 1000) { //Ограничение API на 1000 результатов
                 response.data.total_count = 1000
