@@ -47,7 +47,7 @@ import Loading from './Loading.vue'
             async fetchMenu() {
                 this.loading = true
                 this.items = []
-                const query = `yindex.php/v3/event/rubrics?allowEmpty=${this.allowEmpty ? '1' : '0'}`
+                const query = `https://www.klerk.ru/yindex.php/v3/event/rubrics?allowEmpty=${this.allowEmpty ? '1' : '0'}`
 
                 await fetch(query) 
                 .then(response => response.json())

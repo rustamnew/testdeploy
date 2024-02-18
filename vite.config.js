@@ -14,12 +14,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  server: {
-    proxy: {
-        '^/yindex.php': {
-            target: 'https://www.klerk.ru',
-            changeOrigin: true
-        }
-    }
-  }
 })
