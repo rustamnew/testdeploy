@@ -1,8 +1,9 @@
 <template>
     <li class="menu-item" :class="expanded ? 'expanded' : ''">
-        <button v-if="item.children && item.children.length > 0" class="expand" @click="expandClick()">{{ expanded ? '-' : '+' }}</button>
         
         <div class="title">
+            <button v-if="item.children && item.children.length > 0" class="expand" @click="expandClick()">{{ expanded ? '-' : '+' }}</button>
+            
             <a class="link" :href="`https://www.klerk.ru${item.url}`" target="_blank">{{item.title}}</a>
 
             <input type="checkbox" v-model="checkbox" @change="check()">
@@ -12,7 +13,7 @@
         </div>
 
         <ul class="list" v-if="item.children && item.children.length > 0">
-            <MenuItem v-for="child in item.children" :item="child" @check="checkEventHandler($event)"/> 
+            <MenuItem v-for="child, index in item.children" :item="child" @check="checkEventHandler($event, index)"/> 
         </ul>
     </li>
 </template>
@@ -29,7 +30,7 @@
                 checkbox: false,
                 childrenCount: 0,
                 totalCount: 0,
-                checkedSumm: 0
+                checkedInfo: {}
             }
         },
         mounted() {
@@ -64,33 +65,30 @@
             },
 
             check() {
-                let count = 0;
-
                 if (this.checkbox) {
-                    count = this.totalCount
-                } else {
-                    count = this.totalCount * -1
-                }
-
-                this.checkedSumm += count
-                
-                if (this.checkbox) { 
-                    this.$emit('check', count)
-                } else if (this.checkedSumm > 0) {
-                    this.$emit('check', this.checkedSumm)
-                } else {
-                    this.$emit('check', count)
-                }
-                
-            },
-
-            checkEventHandler(count) {
-                this.checkedSumm += count
-
-                if (this.checkbox) { 
                     this.$emit('check', this.totalCount)
                 } else {
-                    this.$emit('check', this.checkedSumm)
+                    this.$emit('check', 0)
+                }
+            },
+
+            checkEventHandler(event, index) {
+                if (typeof this.checkedInfo[index] === 'undefined') {
+                    this.checkedInfo[index] = 0
+                }
+                
+                this.checkedInfo[index] = event
+
+                if (this.checkbox) {
+                    this.$emit('check', this.totalCount)
+                } else {
+                    let summ = 0
+
+                    for (const item in this.checkedInfo) {
+                        summ += this.checkedInfo[item]
+                    }
+                    
+                    this.$emit('check', summ)
                 }
             }
         }
@@ -122,6 +120,8 @@
         justify-content: center;
         background: none;
         cursor: pointer;
+        align-self: flex-start;
+        margin-top: 2px;
     }
     .list {
         display: none;

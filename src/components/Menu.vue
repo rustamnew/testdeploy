@@ -47,7 +47,10 @@ import Loading from './Loading.vue'
             async fetchMenu() {
                 this.loading = true
                 this.items = []
-                const query = `https://www.klerk.ru/yindex.php/v3/event/rubrics?allowEmpty=${this.allowEmpty ? '1' : '0'}`
+                this.checkedInfo = {}
+                this.checkedSumm = 0
+
+                const query = `yindex.php/v3/event/rubrics?allowEmpty=${this.allowEmpty ? '1' : '0'}`
 
                 await fetch(query) 
                 .then(response => response.json())
@@ -67,9 +70,12 @@ import Loading from './Loading.vue'
                 this.expanded = !this.expanded
             },
             countCheckedSumm(event, index) {
-
                 if (!this.checkedInfo[index]) {
                     this.checkedInfo[index] = 0
+                }
+
+                if (event < 0) {
+                    event = 0
                 }
 
                 this.checkedInfo[index] = event
@@ -115,6 +121,7 @@ import Loading from './Loading.vue'
         justify-content: center;
         background: none;
         cursor: pointer;
+        margin-bottom: 2px;
     }
     .expanded .list{
         border-left: 1px solid lightgray;
