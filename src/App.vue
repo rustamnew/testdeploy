@@ -42,4 +42,12 @@ import { useConfigStore } from './stores/config';
     div + .router-link {
         margin-top: 2rem;
     }
+
+    @media (max-width: 800px) {
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+    }
 </style>

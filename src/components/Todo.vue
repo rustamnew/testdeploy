@@ -13,6 +13,8 @@ import IconPlus from './icons/IconPlus.vue';
     <div class="todo">
         <TodoItem v-for="item, index in todoStore.items" :key="index" :itemProp="item" :index="index"/>
 
+        <span class="empty" v-if="!todoStore.items.length">Нет задач</span>
+
         <button class="add-todo" v-if="configStore.config.todoAddForm === false" @click="addItem()">
             <IconPlus color="green" size="4rem"/>
         </button>
@@ -54,6 +56,11 @@ import IconPlus from './icons/IconPlus.vue';
         width: 100%;
     }
 
+    .empty {
+        width: 100%;
+        text-align: center;
+    }
+
     .add-todo {
         border: 3px green solid;
         border-radius: 4px;
@@ -73,6 +80,9 @@ import IconPlus from './icons/IconPlus.vue';
         .todo {
             flex-direction: column;
             align-items: center;
+        }
+        .add-todo {
+            width: 100%;
         }
     }
 </style>

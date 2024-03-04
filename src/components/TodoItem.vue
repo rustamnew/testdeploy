@@ -11,6 +11,7 @@
 
 <template>
     <div class="todo-item">
+
         <!--Edit mode-->
         <template v-if="editMode === true">
             <div class="title">
@@ -64,6 +65,7 @@
                     <label>
                         <input v-model="step.checked" @change="saveItem()" type="checkbox">
                         <span>{{ step.title }}</span>
+                        <IconCheck v-if="step.checked" color="green" size="2rem"/>
                     </label>
                 </li>
             </ul>
@@ -129,6 +131,7 @@
             itemProp: {
                 handler(val, oldVal) {
                     this.item = val
+                    this.itemDefault = val
                 },
                 deep: true
             },
@@ -152,6 +155,7 @@
                 this.item.steps.splice(index, 1)
             },
             editItem() {
+                this.itemDefault = JSON.parse(JSON.stringify(this.item)) 
                 this.editMode = true
 
                 this.$nextTick(() => {
@@ -211,9 +215,6 @@
     span {
         word-break: break-word;
     }
-    h5 {
-        font-size: 2rem;
-    }
     button {
         appearance: none;
         background: none;
@@ -234,6 +235,8 @@
         .title {
             margin-bottom: 0.5rem;
             word-break: break-word;
+            font-size: 2rem;
+
             input {
                 width: 100%;
                 font-size: 1.5rem;
@@ -245,6 +248,7 @@
             word-break: break-word;
             margin-bottom: 0.5rem;
             display: flex;
+            font-size: 1.3rem;
 
             textarea {
                 width: 100%;
@@ -255,10 +259,26 @@
             display: flex;
             align-items: center;
             margin-bottom: 0.3rem;
+            height: 2rem;
 
             label {
                 display: flex;
                 align-items: center;
+                height: 100%;
+                width: 100%;
+                
+                border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+                input[type="checkbox"] {
+                    display: none;
+                }
+                input[type="checkbox"]:checked + span {
+                    text-decoration: line-through;
+                    opacity: 0.7;
+                }
+                svg{
+                    margin-left: auto;
+                }
             }
 
             .remove {
@@ -288,6 +308,10 @@
             padding: 4px 8px;
             border-radius: 4px;
             margin-top: 1rem;
+
+            &:hover {
+                    background-color: rgba($color: purple, $alpha: 0.7);
+                }
         }
 
         .controls {
@@ -318,16 +342,32 @@
 
             .cancel {
                 background-color: red;
+
+                &:hover {
+                    background-color: rgba($color: red, $alpha: 0.7);
+                }
             }
             .edit {
                 background-color: orange;
                 padding: 0.4rem;
+
+                &:hover {
+                    background-color: rgba($color: orange, $alpha: 0.7);
+                }
             }
             .check {
                 background-color: green;
+
+                &:hover {
+                    background-color: rgba($color: green, $alpha: 0.7);
+                }
             }
             .remove {
                 background-color: gray;
+
+                &:hover {
+                    background-color: rgba($color: gray, $alpha: 0.7);
+                }
             }
         }
     }

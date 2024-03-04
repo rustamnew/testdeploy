@@ -230,6 +230,10 @@
             padding: 4px 8px;
             border-radius: 4px;
             margin-top: 1rem;
+
+            &:hover {
+                background-color: rgba($color: purple, $alpha: 0.7);
+            }
         }
 
         .controls {
@@ -260,16 +264,17 @@
 
             .cancel {
                 background-color: red;
-            }
-            .edit {
-                background-color: orange;
-                padding: 0.4rem;
+
+                &:hover {
+                    background-color: rgba($color: red, $alpha: 0.7);
+                }
             }
             .check {
                 background-color: green;
-            }
-            .remove {
-                background-color: gray;
+
+                &:hover {
+                    background-color: rgba($color: green, $alpha: 0.7);
+                }
             }
         }
     }
