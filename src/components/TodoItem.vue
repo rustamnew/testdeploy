@@ -11,6 +11,7 @@
 
 <template>
     <div class="todo-item">
+        <div class="content">
 
         <!--Edit mode-->
         <template v-if="editMode === true">
@@ -77,7 +78,7 @@
             </div>
         </template>
 
-        
+        </div>
     </div>
 
     <Teleport to="body">
@@ -224,13 +225,20 @@
     }
 
     .todo-item {
-        border: 1px solid #000000;
-        padding: 8px;
-        display: flex;
-        flex-direction: column;
+        
         flex-shrink: 0;
         width: 100%;
         max-width: 350px;
+        padding: 0 0.8rem 1.6rem;
+
+        .content {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #000000;
+            display: flex;
+            flex-direction: column;
+            padding: 8px;
+        }
 
         .title {
             margin-bottom: 0.5rem;
@@ -369,6 +377,12 @@
                     background-color: rgba($color: gray, $alpha: 0.7);
                 }
             }
+        }
+    }
+
+    @media (max-width: 800px) {
+        .todo-item {
+            margin: 0 0 12px;
         }
     }
     

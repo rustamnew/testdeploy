@@ -52,7 +52,6 @@ import IconPlus from './icons/IconPlus.vue';
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
         width: 100%;
     }
 
