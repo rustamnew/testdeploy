@@ -1,5 +1,6 @@
 <script setup>
-import {RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import { useConfigStore } from './stores/config';
 </script>
 
 <template>
@@ -8,7 +9,25 @@ import {RouterView } from 'vue-router'
     </div>
 </template>
 
+<script>
+    export default {
+        data() {
+            const configStore = useConfigStore()
+
+            return {
+                configStore
+            }
+        },
+        created() {
+            this.configStore.loadData()
+        }
+    }
+</script>
+
 <style>
+    #app {
+        width: 100%;
+    }
     #app > .page {
         display: flex;
         flex-direction: column;

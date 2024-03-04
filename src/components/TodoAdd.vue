@@ -1,8 +1,6 @@
 <script setup>
     import IconCross from './icons/IconCross.vue'
     import IconCheck from './icons/IconCheck.vue'
-    import IconEdit from './icons/IconEdit.vue'
-    import IconRemove from './icons/IconRemove.vue'
 
     import Modal from './Modal.vue'
     
@@ -10,89 +8,47 @@
 </script>
 
 <template>
-    <div class="todo-item">
-        <!--Edit mode-->
-        <template v-if="editMode === true">
-            <div class="title">
-                <input type="text" placeholder="Заголовок" v-model="item.title">
-            </div>
+    <div class="todo-add">
+        <h2>Добавить задачу</h2>
+
+        <div class="title">
+            <input type="text" placeholder="Заголовок" v-model="item.title">
+        </div>
             
-            <div class="text">
-                <textarea placeholder="Описание" v-model="item.text" @input="resizeTextarea()" ref="textarea"></textarea>
-            </div>
+        <div class="text">
+            <textarea placeholder="Описание" v-model="item.text" @input="resizeTextarea()" ref="textarea"></textarea>
+        </div>
             
-            <ul class="steps">
-                <li v-for="step, index in item.steps" :key="index" class="step">
-                    <input v-model="step.checked" type="checkbox">
-                    <input type="text" v-model="step.title" placeholder="Название этапа">
+        <ul class="steps">
+            <li v-for="step, index in item.steps" :key="index" class="step">
+                <input v-model="step.checked" type="checkbox">
+                <input type="text" v-model="step.title" placeholder="Название этапа">
 
-                    <button class="remove" @click="removeStep(index)">
-                        <IconCross color="red" />
-                    </button>
-                </li>
-
-                <button class="add-step" @click="addStep()">Добавить этап</button>
-            </ul>
-
-            <div class="controls">
-                <button class="cancel" @click="cancelEdit()"> 
-                    <IconCross /> 
+                <button class="remove" @click="removeStep(index)">
+                    <IconCross color="red" />
                 </button>
+            </li>
 
-                <button class="check" @click="saveItem()"> 
-                    <IconCheck /> 
-                </button>
+            <button class="add-step" @click="addStep()">Добавить этап</button>
+        </ul>
 
-                <button class="remove" @click="confirmRemoveItem()"> 
-                    <IconRemove /> 
-                </button>
-            </div>
-        </template>
+        <div class="controls">
+            <button class="cancel" @click="cancelEdit()"> 
+                <IconCross /> 
+            </button>
 
-        <!--View mode-->
-        <template v-else>
-            <h5 class="title">
-                {{ item.title }}
-            </h5>
-
-            <div class="text" v-if="item.text">
-                {{ item.text }}
-            </div>
-
-            <ul class="steps" v-if="item.steps">
-                <li v-for="step, index in item.steps" :key="index" class="step">
-                    <label>
-                        <input v-model="step.checked" @change="saveItem()" type="checkbox">
-                        <span>{{ step.title }}</span>
-                    </label>
-                </li>
-            </ul>
-
-            <div class="controls">
-                <button class="edit" @click="editItem()"> 
-                    <IconEdit /> 
-                </button>
-            </div>
-        </template>
-
-        
+            <button class="check" @click="saveItem()"> 
+                <IconCheck /> 
+            </button>
+        </div>
     </div>
 
     <Teleport to="body">
         <Modal 
-        v-if="confirmRemove === true"
-        title="Удалить задачу" 
-        message="Отменить это действие будет невозможно" 
-        mode="confirm"
-        :callback="() => {removeItem()}" 
-        @close="confirmRemove = false" 
-        />
-
-        <Modal 
         v-if="error.showError === true"
         :message="error.message" 
         mode="message"
-        :callback="() => {removeItem()}" 
+        :callback="() => {removeItem(index)}" 
         @close="error.showError = false" 
         />
     </Teleport>
@@ -103,39 +59,20 @@
 <script>
     export default {
         data() {
-            const item = JSON.parse(JSON.stringify(this.itemProp))
-            const itemDefault = JSON.parse(JSON.stringify(this.itemProp))
-
             const todoStore = useTodoStore()
 
             return {
-                item,
-                itemDefault,
-                editMode: false,
-                confirmRemove: false,
+                todoStore,
+                item: {
+                    title: '',
+                    text: '',
+                    steps: []
+                },
                 error: {
                     message: '',
                     showError: false
                 },
-                todoStore
             }
-        },
-        created() {
-            if (this.allEmptyCheck()) {
-                this.editMode = true
-            }
-        },
-        watch: {
-            itemProp: {
-                handler(val, oldVal) {
-                    this.item = val
-                },
-                deep: true
-            },
-        },
-        props: {
-            itemProp: Object,
-            index: Number
         },
         methods: {
             allEmptyCheck() {
@@ -151,19 +88,15 @@
             removeStep(index) {
                 this.item.steps.splice(index, 1)
             },
-            editItem() {
-                this.editMode = true
-
-                this.$nextTick(() => {
-                    this.resizeTextarea()
-                });
-            },
             saveItem() {
                 if (!this.allEmptyCheck()) {
-                    this.todoStore.saveItem(this.item, this.index)
+                    this.todoStore.saveItem(this.item, this.todoStore.items.length)
 
-                    this.itemDefault = this.item
-                    this.editMode = false
+                    this.item = {
+                        title: '',
+                        text: '',
+                        steps: []
+                    }
                 } else {
                     this.error.message = 'Нельзя сохранить пустую задачу'
                     this.error.showError = true
@@ -171,14 +104,11 @@
                 
             },
             cancelEdit() {
-                this.item = this.itemDefault
-                this.editMode = false
-            },
-            confirmRemoveItem() {
-                this.confirmRemove = true
-            },
-            removeItem() {
-                this.todoStore.removeItem(this.index)
+                this.item = {
+                    title: '',
+                    text: '',
+                    steps: []
+                }   
             },
             resizeTextarea() {
                 const textarea = this.$refs.textarea;
@@ -222,16 +152,21 @@
         cursor: pointer;
     }
 
-    .todo-item {
+    .todo-add {
         border: 1px solid #000000;
         padding: 8px;
         display: flex;
         flex-direction: column;
-        flex-shrink: 0;
+        align-items: center;
         width: 100%;
-        max-width: 350px;
+        margin-bottom: 5rem;
+
+        h2 {
+            margin-bottom: 2rem;
+        }
 
         .title {
+            width: 100%;
             margin-bottom: 0.5rem;
             word-break: break-word;
             input {
@@ -241,6 +176,7 @@
         }
 
         .text {
+            width: 100%;
             white-space: pre-wrap;
             word-break: break-word;
             margin-bottom: 0.5rem;
@@ -248,7 +184,13 @@
 
             textarea {
                 width: 100%;
+                min-height: 6rem;
             }
+        }
+
+        .steps {
+            align-self: flex-start;
+            min-width: 50%;
         }
         
         .step {
@@ -331,5 +273,4 @@
             }
         }
     }
-    
 </style>

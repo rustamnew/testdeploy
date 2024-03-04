@@ -7,7 +7,7 @@ const emit = defineEmits()
 
 const modalContent = ref(null)
 
-onClickOutside(modalContent, () => { emit('cancel') })
+onClickOutside(modalContent, () => { emit('close') })
 </script>
 
 <template>
@@ -42,9 +42,10 @@ onClickOutside(modalContent, () => { emit('cancel') })
         methods: {
             confirm() {
                 this.callback()
+                this.close()
             },
             close() {
-                this.$emit('cancel')
+                this.$emit('close')
             }
         }
     }

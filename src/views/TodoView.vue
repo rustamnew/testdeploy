@@ -1,10 +1,14 @@
 <script setup>
 import Todo from '../components/Todo.vue'
+import TodoAdd from '../components/TodoAdd.vue'
 import { RouterLink } from 'vue-router';
+import { useConfigStore } from '../stores/config';
+
+const configStore = useConfigStore()
 </script>
 
 <template>
-    <h1>Список задач</h1>
+    <TodoAdd v-if="configStore.config.todoAddForm === true"/>
     
     <Todo />
 

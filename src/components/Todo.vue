@@ -2,15 +2,18 @@
 import TodoItem from './TodoItem.vue'
 
 import { useTodoStore } from '../stores/todo';
+import { useConfigStore } from '../stores/config';
 
 import IconPlus from './icons/IconPlus.vue';
 </script>
 
 <template>
+    <h2>Список задач</h2>
+
     <div class="todo">
         <TodoItem v-for="item, index in todoStore.items" :key="index" :itemProp="item" :index="index"/>
 
-        <button class="add-todo" v-if="true/*!todoStore.items.length*/" @click="addItem()">
+        <button class="add-todo" v-if="configStore.config.todoAddForm === false" @click="addItem()">
             <IconPlus color="green" size="4rem"/>
         </button>
     </div>
@@ -20,9 +23,12 @@ import IconPlus from './icons/IconPlus.vue';
     export default {
         data() {
             const todoStore = useTodoStore()
+            const configStore = useConfigStore()
+
             
             return {
-                todoStore
+                todoStore,
+                configStore
             }
         },
         created() {
@@ -37,10 +43,15 @@ import IconPlus from './icons/IconPlus.vue';
 </script>
 
 <style scoped lang="scss">
+    h2 {
+        margin-bottom: 1rem;
+    }
     .todo {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         gap: 12px;
+        width: 100%;
     }
 
     .add-todo {

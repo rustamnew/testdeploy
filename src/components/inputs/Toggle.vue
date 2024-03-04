@@ -2,7 +2,7 @@
 <template>
     <div class="toggle">
         <label class="switch">
-            <input type="checkbox" @change="$emit('toggle', $event.target.checked)">
+            <input :checked="active" type="checkbox" @change="$emit('toggle', $event.target.checked)">
             <span class="slider round"></span>
         </label>
 
@@ -14,7 +14,8 @@
 <script>
     export default {
         props: {
-            text: String
+            text: String,
+            active: Boolean
         }
     }
 </script>
@@ -32,6 +33,7 @@
   display: inline-block;
   width: 60px;
   height: 34px;
+  flex-shrink: 0;
 }
 
 .switch input {
