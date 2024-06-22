@@ -695,9 +695,12 @@ const socials = ref([
                     background-color: #553D67;
                 }
 
+                .footer__registered-logo{
+                    margin-right: 29px
+                }
                 .footer__registered-info {
                     display: flex;
-
+                    font-size: 13px;
                     img {
                         width: 13px;
                         height: 13px;
