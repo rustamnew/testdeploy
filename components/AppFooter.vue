@@ -343,7 +343,7 @@ const socials = ref([
                     color: #ffffff;
                 }
 
-                &:nth-child(4) {
+                &:nth-child(3) {
                     padding: 28px 10px 28px 108px;
 
                     .footer-action__icon {
