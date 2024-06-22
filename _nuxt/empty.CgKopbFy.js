@@ -1,1 +1,0 @@
-import{_ as s,c as t,aR as o,o as c}from"./entry.BXnrCNv6.js";const a={},n={class:"main"};function r(e,_){return c(),t("div",n,[o(e.$slots,"default")])}const d=s(a,[["render",r]]);export{d as default};
