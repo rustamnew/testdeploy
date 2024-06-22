@@ -236,4 +236,17 @@ function closeMobileMenu() {
         }
 
     }
+
+    @media screen and (max-width: 360px) {
+        header {
+            .mobile-menu-open {
+                margin-right: 12px;
+            }
+
+            .logo img {
+                width: 120px;
+            }
+        }
+
+    }
 </style>

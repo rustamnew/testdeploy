@@ -733,5 +733,12 @@ const socials = ref([
             }
         }
     }
+
+    @media screen and (max-width: 360px) {
+        .footer__menu .footer__nav .nav__list {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
 }
 </style>
