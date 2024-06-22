@@ -229,6 +229,7 @@ const socials = ref([
 .footer {
     background: #282828;
     color: #B09EBC;
+    overflow-x: hidden;
 
     & > *:not(:first-child) {
         border-top: 1px solid #553D67;
