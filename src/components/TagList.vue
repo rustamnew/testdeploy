@@ -38,23 +38,17 @@ const list = ref(null)
         methods: {
             
             onResize() {
+                this.reset() // Заполняем список тегов
                 this.$nextTick(() => { //Ждём обновления отрисовки
-                    this.checkOverflow();
-                    
-                    //Если экран увеличился, добавляем элемент
-                    if (window.innerWidth > this.windowWidth && this.tags[this.tagsArray.length]) {
-                        this.tagsArray.push(this.tags[this.tagsArray.length])
-
-                        this.$nextTick(() => { //Если после добавления элемент вылез за грани, убираем
-                            if (this.$refs.list.scrollWidth > this.$refs.list.offsetWidth) {
-                                this.tagsArray.pop();
-                            }  
-                        })
-                        
-                    }
-                    this.windowWidth = window.innerWidth
+                    this.checkOverflow(); // Проверяем на переполненность
                 })
             },
+
+            // Восстановление значения по умолчанию
+            reset() {
+                this.tagsArray = JSON.parse(JSON.stringify(this.tags)) 
+            },
+            
 
             // Проверка на переполненность списка тегов
             checkOverflow() {
